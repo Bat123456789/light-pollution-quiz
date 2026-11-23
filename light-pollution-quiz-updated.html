@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light pollution in Zurich – Interactive question</title>
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#26374a;background:#f6f2e9}*{box-sizing:border-box}body{margin:0;padding:20px}.panel{max-width:680px;margin:auto;padding:24px;background:#fffdf9;border:1px solid #ded9cd;border-radius:14px}h1{font-size:clamp(22px,4vw,30px);line-height:1.2;margin:0 0 12px}p{line-height:1.5}.option{display:block;width:100%;text-align:left;background:#fff;border:1px solid #c9cbd0;border-radius:9px;padding:14px 16px;margin:10px 0;font-size:16px;color:#26374a;cursor:pointer}.option:hover,.option:focus-visible{border-color:#2b5876;background:#f0f6f8}.option[aria-pressed="true"]{background:#e7f0f3;border:2px solid #2b5876;padding:13px 15px}.result{background:#edf3f4;border-radius:10px;padding:20px;margin-top:18px}.result-heading{font-size:15px;font-weight:700;margin:0 0 10px}.percent{font-size:46px;font-weight:700;line-height:1.1;color:#244e69}.small{font-size:12px;color:#555e68;margin-top:15px}.hidden{display:none}
+</style>
+</head>
+<body><main class="panel">
+<h1>Have you ever heard of light pollution?</h1>
+<div role="group" aria-label="Choose your answer">
+<button class="option" type="button" data-key="know" aria-pressed="false">Yes, and I know what it means.</button>
+<button class="option" type="button" data-key="heard" aria-pressed="false">Yes, but I'm not sure what it means.</button>
+<button class="option" type="button" data-key="no" aria-pressed="false">No, I've never heard of it.</button>
+</div>
+<section id="result" class="result hidden" aria-live="polite"><p class="result-heading">How did people in Zurich answer?</p><div class="percent" id="percentage"></div><p id="description"></p><p class="small">Source: gfs-zürich (2023), representative survey of 1,011 adults in the canton of Zurich. Percentages are from the published survey, not from visitors to this page. Your selection is not stored.</p></section>
+</main>
+<script>
+const results={know:{pct:'65%',description:'of respondents said they knew what light pollution means.'},heard:{pct:'14%',description:'had heard of light pollution but did not claim to know what it means.'},no:{pct:'21%',description:'said they had not heard of light pollution.'}};
+document.querySelectorAll('.option').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.option').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));const r=results[button.dataset.key];document.getElementById('percentage').textContent=r.pct;document.getElementById('description').textContent=r.description;document.getElementById('result').classList.remove('hidden');}));
+</script></body></html>
